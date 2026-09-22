@@ -10,23 +10,55 @@
   <main>
     <h1>Crypto Price Tracker</h1>
 
-    <div class="search-box">
-      <input type="text" id="search-input" placeholder="Search a coin (e.g. bitcoin, eth)" autocomplete="off" />
-      <ul id="suggestions" class="suggestions hidden"></ul>
+    <div class="controls-row">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="search">Search</button>
+        <button class="tab-btn" data-tab="favorites">Favorites</button>
+      </div>
+      <select id="currency-select" title="Currency"></select>
     </div>
 
-    <div id="result" class="result hidden">
-      <img id="result-thumb" src="" alt="" />
-      <div class="result-info">
-        <div class="result-name" id="result-name"></div>
-        <div class="result-price" id="result-price"></div>
-        <div class="result-change" id="result-change"></div>
+    <section id="search-panel" class="panel">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search a coin (e.g. bitcoin, eth)" autocomplete="off" />
+        <ul id="suggestions" class="suggestions hidden"></ul>
       </div>
+    </section>
+
+    <section id="favorites-panel" class="panel hidden">
+      <ul id="favorites-list" class="favorites-list"></ul>
+      <div id="favorites-empty" class="empty-message hidden">No favorites yet — star a coin to add it here.</div>
+    </section>
+
+    <div id="result" class="result hidden">
+      <div class="result-header">
+        <img id="result-thumb" src="" alt="" />
+        <div class="result-info">
+          <div class="result-name" id="result-name"></div>
+          <div class="result-price" id="result-price"></div>
+          <div class="result-change" id="result-change"></div>
+        </div>
+        <button id="favorite-btn" class="favorite-btn" title="Add to favorites">☆</button>
+      </div>
+
+      <div class="chart-controls">
+        <button class="range-btn" data-days="1">24H</button>
+        <button class="range-btn active" data-days="7">7D</button>
+        <button class="range-btn" data-days="30">30D</button>
+        <button class="range-btn" data-days="90">90D</button>
+        <button class="range-btn" data-days="365">1Y</button>
+      </div>
+
+      <div class="chart-wrap">
+        <canvas id="price-chart" height="220"></canvas>
+      </div>
+      <div id="chart-status" class="status"></div>
     </div>
 
     <div id="status" class="status"></div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

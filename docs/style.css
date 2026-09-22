@@ -8,6 +8,7 @@
   --accent: #4f8cff;
   --green: #16c784;
   --red: #ea3943;
+  --gold: #f0b90b;
 }
 
 * {
@@ -27,13 +28,59 @@ body {
 
 main {
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
 }
 
 h1 {
   font-size: 1.5rem;
   margin-bottom: 24px;
   text-align: center;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+#currency-select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.panel.hidden {
+  display: none;
 }
 
 .search-box {
@@ -100,21 +147,88 @@ h1 {
   display: none !important;
 }
 
+.favorites-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.favorites-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.favorites-list li:hover {
+  border-color: var(--accent);
+}
+
+.favorites-list img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.favorites-list .fav-name {
+  font-weight: 500;
+}
+
+.favorites-list .fav-symbol {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.favorites-list .fav-right {
+  margin-left: auto;
+  text-align: right;
+}
+
+.favorites-list .fav-price {
+  font-weight: 600;
+}
+
+.favorites-list .fav-change {
+  font-size: 0.8rem;
+}
+
+.empty-message {
+  color: var(--muted);
+  text-align: center;
+  padding: 24px 0;
+  font-size: 0.9rem;
+}
+
 .result {
   margin-top: 24px;
   padding: 20px;
   border-radius: 12px;
   background: var(--card);
   border: 1px solid var(--border);
+}
+
+.result-header {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.result img {
+.result-header img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+.result-info {
+  flex: 1;
 }
 
 .result-name {
@@ -140,10 +254,57 @@ h1 {
   color: var(--red);
 }
 
+.favorite-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.favorite-btn.active {
+  color: var(--gold);
+}
+
+.chart-controls {
+  display: flex;
+  gap: 6px;
+  margin-top: 18px;
+}
+
+.range-btn {
+  flex: 1;
+  padding: 6px 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.range-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.chart-wrap {
+  margin-top: 14px;
+  height: 220px;
+  position: relative;
+}
+
 .status {
   margin-top: 16px;
   text-align: center;
   color: var(--muted);
   font-size: 0.9rem;
   min-height: 1.2em;
+}
+
+#chart-status {
+  margin-top: 8px;
 }

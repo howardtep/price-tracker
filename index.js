@@ -33,28 +33,49 @@ app.get('/api/search', async (req, res) => {
   }
 });
 
-// Get USD price for a coin by id
-app.get('/api/price/:id', async (req, res) => {
-  const { id } = req.params;
+// Get price(s) for one or more coin ids in a given currency
+// GET /api/price?ids=bitcoin,ethereum&vs_currency=usd
+app.get('/api/price', async (req, res) => {
+  const { ids, vs_currency = 'usd' } = req.query;
+  if (!ids) {
+    return res.status(400).json({ error: 'Missing query parameter "ids"' });
+  }
 
   try {
     const response = await fetch(
-      `${COINGECKO_BASE}/simple/price?ids=${encodeURIComponent(id)}&vs_currencies=usd&include_24hr_change=true`
+      `${COINGECKO_BASE}/simple/price?ids=${encodeURIComponent(ids)}&vs_currencies=${encodeURIComponent(
+        vs_currency
+      )}&include_24hr_change=true`
     );
     if (!response.ok) {
       return res.status(response.status).json({ error: 'Failed to fetch price' });
     }
     const data = await response.json();
-    if (!data[id]) {
-      return res.status(404).json({ error: 'Coin not found' });
-    }
-    res.json({
-      id,
-      usd: data[id].usd,
-      usd_24h_change: data[id].usd_24h_change,
-    });
+    res.json(data);
   } catch (err) {
     res.status(500).json({ error: 'Price request failed' });
+  }
+});
+
+// Get historical price data for a coin
+// GET /api/history/:id?vs_currency=usd&days=7
+app.get('/api/history/:id', async (req, res) => {
+  const { id } = req.params;
+  const { vs_currency = 'usd', days = 7 } = req.query;
+
+  try {
+    const response = await fetch(
+      `${COINGECKO_BASE}/coins/${encodeURIComponent(id)}/market_chart?vs_currency=${encodeURIComponent(
+        vs_currency
+      )}&days=${encodeURIComponent(days)}`
+    );
+    if (!response.ok) {
+      return res.status(response.status).json({ error: 'Failed to fetch history' });
+    }
+    const data = await response.json();
+    res.json({ prices: data.prices });
+  } catch (err) {
+    res.status(500).json({ error: 'History request failed' });
   }
 });
 
