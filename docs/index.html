@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Price Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>Crypto Price Tracker</h1>
+
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Search a coin (e.g. bitcoin, eth)" autocomplete="off" />
+      <ul id="suggestions" class="suggestions hidden"></ul>
+    </div>
+
+    <div id="result" class="result hidden">
+      <img id="result-thumb" src="" alt="" />
+      <div class="result-info">
+        <div class="result-name" id="result-name"></div>
+        <div class="result-price" id="result-price"></div>
+        <div class="result-change" id="result-change"></div>
+      </div>
+    </div>
+
+    <div id="status" class="status"></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
